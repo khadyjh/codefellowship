@@ -1,5 +1,3 @@
-# codefellowship
-
 # lab 16
 build spring authenticate project using spring security dependency 
 
@@ -28,3 +26,5 @@ the logged-in user can access the root page and logout from there .
 implementation 'org.springframework.boot:spring-boot-starter-security'
 implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 ```
+
+

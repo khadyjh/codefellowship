@@ -1,0 +1,9 @@
+p {
+    color: red;
+}
+
+div{
+     border-radius: 5px;
+     background-color: #F24A72;
+     padding: 20px;
+}

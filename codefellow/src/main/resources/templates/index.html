@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>home Route</title>
+    <style>
+
+       input[type=submit] {
+          border: none;
+          background-color: #B7CADB;
+          color: white;
+        }
+      .topnav {
+        overflow: hidden;
+        background-color: #B7CADB;
+        }
+
+      .topnav a {
+         float: left;
+         color: #f2f2f2;
+         text-align: center;
+         padding: 14px 16px;
+         text-decoration: none;
+         font-size: 22px;
+        }
+
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+        }
+
+      .topnav a.active {
+        background-color: #F4BBBB;
+        color: white;
+         }
+      h1{
+             font-family: cursive;
+             text-align: center;
+         }
+      p{
+        font-family: cursive;
+        text-align: center;
+        font-size: 24px;
+      }
+    </style>
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/login">login</a>
+    <a href="/signup">signup</a>
+    <a>
+        <form action="/perform_logout" method="post" id="any">
+        <input type="submit" value="logout">
+        </form>
+    </a>
+</div>
+ <p th:text="${username}" id="username" style="display: none;"></p>
+<h1 id="hideName" th:text="'Hi ' + ${username}" ></h1>
+<h1>welcome to CodeFellowship java spring website  </h1>
+<p> enjoy in your learning journey by joining us <a href="/signup">sign up for free !!</a>  </p>
+<p> you have account <a href="/login">log in </a> and start learning !! </p>
+<script>
+
+    var username=document.getElementById('username').textContent;
+    if(username != "anonymousUser"){
+       document.getElementById("any").style.display = "block";
+       document.getElementById("hideName").style.display = "block";
+    }else{
+     document.getElementById("any").style.display = "none";
+     document.getElementById("hideName").style.display = "none";
+    }
+
+</script>
+</body>
+</html>
