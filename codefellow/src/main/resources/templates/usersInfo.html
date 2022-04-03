@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>usersInfo</title>
+    <style>
+        input[type=submit] {
+          border: none;
+          background-color: #B7CADB;
+          color: white;
+        }
+
+        .topnav {
+          overflow: hidden;
+          background-color: #B7CADB;
+         }
+
+         .topnav a {
+          float: left;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 22px;
+          }
+
+          .topnav a:hover , button:hover {
+           background-color: #ddd;
+           color: black;
+           }
+
+           .topnav a.active {
+            background-color: #F4BBBB;
+            color: white;
+            }
+            h1,h2{
+             font-family: cursive;
+             text-align: center;
+            }
+            .img-class{
+                width: 27%;
+            }
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a>
+        <form action="/perform_logout" method="post">
+            <!--        <button>log out </button>-->
+            <input type="submit" value="logout">
+        </form>
+    </a>
+</div>
+
+<p>user Info</p>
+<!--<form action="/users" method="post">-->
+<!--    <label for="username">find user by username</label><br><br>-->
+<!--    <input name="username" id="username" type="text"><br><br>-->
+
+<!--    <input type="submit" value="search">-->
+
+<!--</form>-->
+<p th:text="${users}" id="user" style="display: none;"></p>
+<p  id="userNotFound" style="display: none;"> user not found </p>
+
+<h3>the result :</h3>
+<ul th:each="user: ${users}" id="userFound" style="display: none;" >
+
+    <label th:text="${user.firstName}"></label> <label th:text="${user.lastName}"></label><br><br>
+    <label th:text="${user.dateOfBirth}"></label><br><br>
+    <label th:text="${user.bio}"></label><br><br>
+
+</ul>
+
+
+<script>
+
+    var username=document.getElementById('user').textContent;
+    if(username == null){
+       document.getElementById("userNotFound").style.display = "block";
+
+    }else{
+     document.getElementById("userFound").style.display = "block";
+
+    }
+
+</script>
+
+</body>
+</html>
