@@ -62,6 +62,7 @@ public class GeneralController {
     public String getLogin(Model model){
         String username=SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("username", username);
+        model.addAttribute("userInfo",applicationUserRepository.findByUsername(username));
         return "login";
     }
     @GetMapping("/hello")
