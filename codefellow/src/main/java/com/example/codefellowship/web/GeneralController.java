@@ -2,6 +2,7 @@ package com.example.codefellowship.web;
 
 import com.example.codefellowship.domain.ApplicationUser;
 import com.example.codefellowship.repositries.ApplicationUserRepository;
+import com.example.codefellowship.repositries.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,24 +13,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 public class GeneralController {
 
     private final ApplicationUserRepository applicationUserRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public GeneralController(ApplicationUserRepository applicationUserRepository) {
+    public GeneralController(ApplicationUserRepository applicationUserRepository, PostRepository postRepository) {
         this.applicationUserRepository = applicationUserRepository;
+        this.postRepository = postRepository;
     }
 
     // root rout
     @GetMapping("/")
     public String getIndex(Model model){
         String username=SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("allpost",postRepository.findAll());
         model.addAttribute("username", username);
         return "index";
     }
