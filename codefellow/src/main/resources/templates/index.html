@@ -42,33 +42,61 @@
         text-align: center;
         font-size: 24px;
       }
+      ul{
+          list-style: none;
+      }
     </style>
 </head>
 <body>
 <div class="topnav">
     <a class="active" href="/">Home</a>
-    <a href="/login">login</a>
-    <a href="/signup">signup</a>
-    <a>
+    <a href="/login" id="login">login</a>
+    <a href="/signup" id="signup">signup</a>
+    <a href="/myprofile" id="profile">profile</a>
+    <a style="float: right;">
         <form action="/perform_logout" method="post" id="any">
         <input type="submit" value="logout">
         </form>
     </a>
+    <a th:text="${username}" style="float: right;" id="loggedUser"></a>
 </div>
  <p th:text="${username}" id="username" style="display: none;"></p>
 <h1 id="hideName" th:text="'Hi ' + ${username}" ></h1>
 <h1>welcome to CodeFellowship java spring website  </h1>
 <p> enjoy in your learning journey by joining us <a href="/signup">sign up for free !!</a>  </p>
 <p> you have account <a href="/login">log in </a> and start learning !! </p>
+
+<h1>all posts </h1>
+<ul th:each="post:${allpost}"  >
+
+    <li>
+        <p>Body: </p><p th:text="${post.body}"></p><br>
+        <p>Date: </p><p th:text="${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}"></p><br>
+
+        <p><-------------------------------------------------------------------------></p>
+    </li>
+
+
+</ul>
+
+
 <script>
 
     var username=document.getElementById('username').textContent;
     if(username != "anonymousUser"){
        document.getElementById("any").style.display = "block";
+       document.getElementById("loggedUser").style.display = "block";
        document.getElementById("hideName").style.display = "block";
+       document.getElementById("signup").style.display = "none";
+       document.getElementById("login").style.display = "none";
+       document.getElementById("profile").style.display = "block";
     }else{
      document.getElementById("any").style.display = "none";
+     document.getElementById("loggedUser").style.display = "none";
      document.getElementById("hideName").style.display = "none";
+     document.getElementById("signup").style.display = "block";
+     document.getElementById("login").style.display = "block";
+     document.getElementById("profile").style.display = "none";
     }
 
 </script>

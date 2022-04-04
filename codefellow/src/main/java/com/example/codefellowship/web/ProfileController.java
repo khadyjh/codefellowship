@@ -51,6 +51,10 @@ public class ProfileController {
     @PostMapping("/users")
     public String postUsers(@RequestParam String username, Model model){
       ApplicationUser applicationUser= applicationUserRepository.findByUsername(username);
+      if(applicationUser==null){
+          return "userNotFound";
+      }
+      model.addAttribute("userPost",postRepository.findByApplicationUserId(applicationUser.getId()));
       model.addAttribute("users",applicationUser);
       return "usersInfo";
     }

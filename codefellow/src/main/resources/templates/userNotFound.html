@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userNotFound</title>
+    <style>
+            input[type=submit] {
+          border: none;
+          background-color: #B7CADB;
+          color: white;
+        }
+
+        .topnav {
+          overflow: hidden;
+          background-color: #B7CADB;
+         }
+
+         .topnav a {
+          float: left;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 22px;
+          }
+
+          .topnav a:hover , button:hover {
+           background-color: #ddd;
+           color: black;
+           }
+
+           .topnav a.active {
+            background-color: #F4BBBB;
+            color: white;
+            }
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/myprofile" id="profile">profile</a>
+    <a>
+        <form action="/perform_logout" method="post">
+            <!--        <button>log out </button>-->
+            <input type="submit" value="logout">
+        </form>
+    </a>
+</div>
+
+<h1>user Not Found /: </h1>
+</body>
+</html>

@@ -39,13 +39,34 @@
             }
             .img-class{
                 width: 27%;
+                float: left;
+                height: 464px;
             }
+                .user_info{
+                text-align: center;
+                font-family: cursive;
+                margin-top: 10%;
+                font-size: 33px;
+            }
+               .post-holder{
+                text-align: center;
+                font-family: cursive;
+                margin-top: 3%;
+                font-size: 26px;
+                list-style: none;
+            }
+            .font{
+                font-family: cursive;
+                font-size: 28px;
+            }
+
     </style>
 </head>
 <body>
 
 <div class="topnav">
     <a class="active" href="/">Home</a>
+    <a href="/myprofile" id="profile">profile</a>
     <a>
         <form action="/perform_logout" method="post">
             <!--        <button>log out </button>-->
@@ -53,38 +74,50 @@
         </form>
     </a>
 </div>
+<h3 class="font">the result :</h3>
 
-<p>user Info</p>
-<!--<form action="/users" method="post">-->
-<!--    <label for="username">find user by username</label><br><br>-->
-<!--    <input name="username" id="username" type="text"><br><br>-->
+<!--<p class="font" >user Info</p>-->
+<div class="img-div">
+    <img class="img-class" src="http://gcseek.com/wp-content/uploads/2018/11/user-icon-female-person-symbol.jpg" alt="profile Pic">
+</div>
 
-<!--    <input type="submit" value="search">-->
-
-<!--</form>-->
 <p th:text="${users}" id="user" style="display: none;"></p>
 <p  id="userNotFound" style="display: none;"> user not found </p>
 
-<h3>the result :</h3>
-<ul th:each="user: ${users}" id="userFound" style="display: none;" >
 
-    <label th:text="${user.firstName}"></label> <label th:text="${user.lastName}"></label><br><br>
+<ul th:each="user: ${users}" id="userFound" class="user_info">
+
+    <label th:text="${user.firstName}" id="user1"></label> <label th:text="${user.lastName}"></label><br><br>
     <label th:text="${user.dateOfBirth}"></label><br><br>
     <label th:text="${user.bio}"></label><br><br>
 
 </ul>
 
+<ul th:each="post:${userPost}" class="post-holder" >
+
+    <li>
+        <label>Body: </label><span th:text="${post.body}"></span><br>
+        <label>Date: </label><span th:text="${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}"></span><br>
+
+        <p><-------------------------------------------------------------------------></p>
+    </li>
+
+
+</ul>
+
+
 
 <script>
 
-    var username=document.getElementById('user').textContent;
-    if(username == null){
-       document.getElementById("userNotFound").style.display = "block";
+    var username=document.getElementById('user1').textContent;
+    alert(username)
+<!--    if(username == null){-->
+<!--       document.getElementById("userNotFound").style.display = "block";-->
 
-    }else{
-     document.getElementById("userFound").style.display = "block";
+<!--    }else{-->
+<!--     document.getElementById("userFound").style.display = "block";-->
 
-    }
+<!--    }-->
 
 </script>
 

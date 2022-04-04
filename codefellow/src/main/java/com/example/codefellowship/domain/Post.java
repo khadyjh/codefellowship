@@ -61,4 +61,11 @@ public class Post {
     public void setApplicationUser(ApplicationUser applicationUser) {
         this.applicationUser = applicationUser;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "body='" + body + '\'' +
+                '}';
+    }
 }

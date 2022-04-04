@@ -1,6 +1,12 @@
 # lab 16
 build spring authenticate project using spring security dependency 
 
+## to use this application
+in order to use this app you need first to run the postgres database server , create new database then link it to this app, and change the database configuration using application.properties File
+
+in first time you running this app **spring.jpa.hibernate.ddl-auto=create** then change it to become **spring.jpa.hibernate.ddl-auto=update**
+you can run this app using command line like **gradle bootRun**
+
 ## routes 
 **can access to this rout without need to log in or signed up**
 - http://localhost:8081/login
@@ -16,10 +22,11 @@ build spring authenticate project using spring security dependency
   
 
 **only registered user can access this rout**
-- http://localhost:8081/hello
+- http://localhost:8081/myprofile
 
 
 the logged-in user can access the root page and logout from there .
+the user can add new post and search for other users using username 
 
 ### needed dependency's
 ```
