@@ -11,10 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,6 +33,7 @@ public class ProfileController {
         this.postRepository = postRepository;
     }
 
+    // profile page
     @GetMapping("/myprofile")
     public String gitProfile(Model model){
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
@@ -39,6 +42,7 @@ public class ProfileController {
         return "profile";
     }
 
+    // search for user rout
     @GetMapping("/users")
     public String GetUser(Model model){
         model.addAttribute("usersList",applicationUserRepository.findAll());
@@ -59,6 +63,7 @@ public class ProfileController {
       return "usersInfo";
     }
 
+    // create post
     @PostMapping("/post")
     public String postNewPost(@RequestParam String body,Model model){
         String currentUser=SecurityContextHolder.getContext().getAuthentication().getName();
@@ -78,4 +83,50 @@ public class ProfileController {
         model.addAttribute("userInfo", applicationUser);
         return "profile";
     }
+
+
+    // follow rout
+    @PostMapping("/follow")
+    public String followUser( Model model, @RequestParam int id){
+        //logged in user
+        String currentUser=SecurityContextHolder.getContext().getAuthentication().getName();
+        ApplicationUser applicationUser=applicationUserRepository.findByUsername(currentUser);
+        // user to follow
+       ApplicationUser userToFollow=applicationUserRepository.findById(id).orElseThrow();
+
+       applicationUser.getFollowers().add(userToFollow);
+       userToFollow.getFollowing().add(applicationUser);
+
+       applicationUserRepository.save(applicationUser);
+       applicationUserRepository.save(userToFollow);
+
+        model.addAttribute("userPost",postRepository.findByApplicationUserId(applicationUser.getId()));
+        model.addAttribute("users",applicationUser);
+       return "usersInfo";
+
+    }
+
+    // feeds
+    @GetMapping("/feed")
+    public String getFeed(Model model){
+        String currentUser=SecurityContextHolder.getContext().getAuthentication().getName();
+        ApplicationUser loggedInUser=applicationUserRepository.findByUsername(currentUser);
+
+        List<ApplicationUser> allFollow=loggedInUser.getFollowers();
+
+      List<Post> allUserPost =new ArrayList<>();
+
+        for (ApplicationUser user :
+                allFollow) {
+            List<Post> postList=user.getPosts();
+            allUserPost.addAll(postList);
+        }
+
+        model.addAttribute("posts",allUserPost);
+        model.addAttribute("username",currentUser);
+
+        return "feed";
+    }
+
+
 }

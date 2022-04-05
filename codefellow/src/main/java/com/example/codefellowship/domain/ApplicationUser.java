@@ -1,5 +1,6 @@
 package com.example.codefellowship.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,6 +9,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@JsonIgnoreProperties({"followers","following"})
 @Entity
 public class ApplicationUser implements UserDetails {
     @Id
@@ -122,6 +124,33 @@ public class ApplicationUser implements UserDetails {
         this.posts = posts;
     }
 
+
+    @ManyToMany
+    @JoinTable(name = "user_user"
+            ,joinColumns = {@JoinColumn(name = "from_id")}
+            ,inverseJoinColumns = {@JoinColumn(name = "to_id")})
+    List<ApplicationUser> following;
+
+   @ManyToMany(mappedBy = "following" , fetch = FetchType.EAGER)
+   List<ApplicationUser> followers;
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<ApplicationUser> following) {
+        this.following = following;
+    }
+
+    public List<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<ApplicationUser> followers) {
+        this.followers = followers;
+    }
+
+
     @Override
     public String toString() {
         return "ApplicationUser{" +
@@ -130,6 +159,7 @@ public class ApplicationUser implements UserDetails {
                 ", lastName='" + lastName + '\'' +
                 ", bio='" + bio + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", posts=" + posts +
                 '}';
     }
 }

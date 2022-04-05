@@ -24,6 +24,16 @@ you can run this app using command line like **gradle bootRun**
 **only registered user can access this rout**
 - http://localhost:8081/myprofile
 
+  profile page for logged-in user contain basic information
+- http://localhost:8081/feed
+
+  page contain post wrote by following post 
+- http://localhost:8081/userInfo
+  information about searched user 
+- http://localhost:8081/follow
+
+  to follow other users 
+
 
 the logged-in user can access the root page and logout from there .
 the user can add new post and search for other users using username 
