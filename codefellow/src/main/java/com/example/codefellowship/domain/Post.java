@@ -1,11 +1,13 @@
 package com.example.codefellowship.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@JsonIgnoreProperties({"applicationUser"})
 @Entity
 public class Post {
 

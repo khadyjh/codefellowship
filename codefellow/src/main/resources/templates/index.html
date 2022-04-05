@@ -53,6 +53,8 @@
     <a href="/login" id="login">login</a>
     <a href="/signup" id="signup">signup</a>
     <a href="/myprofile" id="profile">profile</a>
+    <a href="/feed"  id="feed">feed</a>
+
     <a style="float: right;">
         <form action="/perform_logout" method="post" id="any">
         <input type="submit" value="logout">
@@ -66,6 +68,7 @@
 <p> enjoy in your learning journey by joining us <a href="/signup">sign up for free !!</a>  </p>
 <p> you have account <a href="/login">log in </a> and start learning !! </p>
 
+<!--<p th:text="${allUser}"></p>-->
 <h1>all posts </h1>
 <ul th:each="post:${allpost}"  >
 
@@ -86,6 +89,7 @@
     if(username != "anonymousUser"){
        document.getElementById("any").style.display = "block";
        document.getElementById("loggedUser").style.display = "block";
+       document.getElementById("feed").style.display = "block";
        document.getElementById("hideName").style.display = "block";
        document.getElementById("signup").style.display = "none";
        document.getElementById("login").style.display = "none";
@@ -93,6 +97,7 @@
     }else{
      document.getElementById("any").style.display = "none";
      document.getElementById("loggedUser").style.display = "none";
+     document.getElementById("feed").style.display = "none";
      document.getElementById("hideName").style.display = "none";
      document.getElementById("signup").style.display = "block";
      document.getElementById("login").style.display = "block";

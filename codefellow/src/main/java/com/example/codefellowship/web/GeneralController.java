@@ -33,6 +33,7 @@ public class GeneralController {
         String username=SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("allpost",postRepository.findAll());
         model.addAttribute("username", username);
+        model.addAttribute("allUser",applicationUserRepository.findAll());
         return "index";
     }
 

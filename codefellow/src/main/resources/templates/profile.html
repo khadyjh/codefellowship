@@ -73,9 +73,11 @@
 <div class="topnav">
     <a  href="/">Home</a>
     <a href="/myprofile" class="active" id="profile">profile</a>
+    <a href="/feed" id="feed">feed</a>
+
     <a >
         <form action="/users" method="post">
-            <input name="username" id="username1" type="text">
+            <input name="username" id="username1" type="text" required>
             <input type="submit" value="search for users">
         </form>
     </a>
@@ -109,7 +111,7 @@
 <div class="post-form">
 <form action="/post" method="post" >
     <label >create new post : </label><br>
-    <input type="text" name="body" class="postBox">
+    <input type="text" name="body" class="postBox" required>
     <input type="submit" value="Post">
 </form>
 </div>

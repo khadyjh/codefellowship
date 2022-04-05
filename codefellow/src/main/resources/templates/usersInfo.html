@@ -59,23 +59,45 @@
                 font-family: cursive;
                 font-size: 28px;
             }
+            .fellow_button{
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+               padding: 12px 28px;
+               width: 500%;
+            }
+           .follow_div{
+           display: flex;
+           justify-content: center
+            }
 
     </style>
 </head>
 <body>
 
 <div class="topnav">
-    <a class="active" href="/">Home</a>
+    <a  href="/">Home</a>
     <a href="/myprofile" id="profile">profile</a>
+    <a href="/feed"  id="feed">feed</a>
+
     <a>
-        <form action="/perform_logout" method="post">
+        <form action="/perform_logout" method="post" >
             <!--        <button>log out </button>-->
             <input type="submit" value="logout">
         </form>
     </a>
 </div>
-<h3 class="font">the result :</h3>
 
+<h3 class="font">the result :</h3>
+<div class="follow_div">
+    <form  action="/follow" method="post" th:each="user: ${users}">
+        <input th:value="${user.id}" type="text" name="id" style="display:none">
+       <button class="fellow_button" th:value="${user.id}">follow</button>
+    </form>
+</div>
 <!--<p class="font" >user Info</p>-->
 <div class="img-div">
     <img class="img-class" src="http://gcseek.com/wp-content/uploads/2018/11/user-icon-female-person-symbol.jpg" alt="profile Pic">
@@ -109,8 +131,8 @@
 
 <script>
 
-    var username=document.getElementById('user1').textContent;
-    alert(username)
+<!--    var username=document.getElementById('user1').textContent;-->
+<!--    alert(username)-->
 <!--    if(username == null){-->
 <!--       document.getElementById("userNotFound").style.display = "block";-->
 
