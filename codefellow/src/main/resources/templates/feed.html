@@ -25,9 +25,10 @@
     font-size: 22px;
     }
 
-    .topnav a:hover , button:hover {
+    .topnav a:hover , button:hover , .post_user {
     background-color: #ddd;
     color: black;
+    cursor: pointer;
     }
 
     .topnav a.active {
@@ -68,6 +69,13 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     }
+    .post_user{
+        border: none;
+        background-color: white;
+        font-family: cursive;
+        font-size: 27px;
+        font-weight: 900;
+    }
     </style>
 
 </head>
@@ -96,8 +104,13 @@
 <ul th:each="post:${posts}" class="post-holder" >
 
     <li>
-        <a href="/myprofile"  th:text="${post.applicationUser.username}"></a>
-        <label>author:</label><span th:text="${post.applicationUser.username}"></span><br>
+        <form action="/account" method="post">
+            <input type="text" th:value="${post.applicationUser.id}" name="id" style="display:none">
+            <label>author: </label>
+            <input type="submit" th:value="${post.applicationUser.username}" class="post_user">
+        </form>
+<!--        <a href="/myprofile"  th:text="${post.applicationUser.username}"></a>-->
+<!--        <label>author:</label><span th:text="${post.applicationUser.username}"></span><br>-->
         <label>Body: </label><span th:text="${post.body}"></span><br>
         <label>Date: </label><span th:text="${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}"></span><br>
 

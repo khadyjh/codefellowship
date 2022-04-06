@@ -83,12 +83,13 @@
     <a href="/myprofile" id="profile">profile</a>
     <a href="/feed"  id="feed">feed</a>
 
-    <a>
+    <a style="float: right;">
         <form action="/perform_logout" method="post" >
             <!--        <button>log out </button>-->
             <input type="submit" value="logout">
         </form>
     </a>
+    <a th:value="${currentUser}" th:text="${currentUser}" style="float: right;"></a>
 </div>
 
 <h3 class="font">the result :</h3>

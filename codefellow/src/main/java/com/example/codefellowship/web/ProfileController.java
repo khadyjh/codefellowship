@@ -49,6 +49,8 @@ public class ProfileController {
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("username",currentUser);
 
+        model.addAttribute("currentUser",currentUser);
+
         return "usersInfo";
     }
 
@@ -60,6 +62,10 @@ public class ProfileController {
       }
       model.addAttribute("userPost",postRepository.findByApplicationUserId(applicationUser.getId()));
       model.addAttribute("users",applicationUser);
+
+        String currentUser= SecurityContextHolder.getContext().getAuthentication().getName();
+
+        model.addAttribute("user",currentUser);
       return "usersInfo";
     }
 
@@ -126,6 +132,20 @@ public class ProfileController {
         model.addAttribute("username",currentUser);
 
         return "feed";
+    }
+    
+    @PostMapping("/account")
+    public String getAccount(@RequestParam int id,Model model){
+
+        ApplicationUser user=applicationUserRepository.findById(id).orElseThrow();
+        model.addAttribute("users",user);
+        model.addAttribute("userPost",postRepository.findByApplicationUserId(id));
+        String currentUser= SecurityContextHolder.getContext().getAuthentication().getName();
+
+        model.addAttribute("currentUser",currentUser);
+
+
+        return "usersInfo";
     }
 
 
